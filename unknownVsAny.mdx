@@ -1,0 +1,55 @@
+---
+title: Unknown vs Any in TypeScript
+date: 2023-11-10
+author: Your Name
+---
+
+# Introduction
+
+TypeScript is a powerful statically-typed superset of JavaScript that provides a robust way to catch type-related errors during development. Two commonly used types in TypeScript are `unknown` and `any`. In this article, we'll explore the differences between `unknown` and `any`, and when to use each type in your TypeScript code.
+
+## The `unknown` Type
+
+### What is `unknown`?
+
+The `unknown` type is a type that represents values with an unknown type. When a variable is of type `unknown`, TypeScript enforces stricter type checking compared to the `any` type.
+
+### When to Use `unknown`
+
+- **Type Safety**: Use `unknown` when you want to maintain type safety and ensure that you perform type checks before using the value. This is useful when you are working with external data sources or dynamic inputs where the exact type is not known in advance.
+
+- **Union Types**: You can use `unknown` as a building block for creating more specific types. For instance, you can use type guards to narrow down the type from `unknown` to a more specific type in your code.
+
+```typescript
+function safeParseJSON(data: unknown): object | null {
+  if (typeof data === 'string') {
+    return JSON.parse(data);
+  } else {
+    return null;
+  }
+}
+```
+
+## The `any` Type
+
+### What is `any`?
+
+The `any` type is the most flexible type in TypeScript. It effectively opts out of type checking, allowing you to perform any operations on variables of type `any` without type-related errors.
+
+### When to Use `any`
+
+- **Legacy Code**: In scenarios where you are working with legacy code that does not have type annotations, using `any` can be a pragmatic approach. It allows you to gradually introduce TypeScript into your project.
+
+- **Quick Prototyping**: `any` can be useful for quick prototyping and experimentation when you don't want to spend too much time on type annotations.
+
+```typescript
+function legacyLibraryFunction(input: any) {
+  // No type checking, as it's untyped
+  // Use with caution in modern codebases
+  // Consider refactoring to use better typing when possible
+}
+```
+
+## Conclusion
+
+In TypeScript, choosing between `unknown` and `any` depends on your project's requirements and the level of type safety you want to maintain. `unknown` is the safer choice when dealing with values of unknown types, while `any` should be used sparingly and mainly in scenarios where type checking is not a priority or when working with legacy code. By understanding the distinctions between these types, you can make more informed decisions about how to best leverage TypeScript's type system in your projects.
